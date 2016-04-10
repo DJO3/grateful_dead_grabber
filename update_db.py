@@ -14,10 +14,10 @@ def mongo(host, port):
 def add_to_mongo(db, collection_name, data):
     collection = db[collection_name]
     try:
-        # Check shows to avoid inserting duplicate concerts
-        dupe_check = collection.find_one({'title': {'$regex': collection_name}})
+        # Check shows to avoid inserting duplicate concerts - inconsistent file names obstructs upsert.
+        dupe_check = collection.find_one({'_id': data['date']})
         if not dupe_check:
-            collection.update_one({'title': data['title']}, {'$set': {'files': data['files']}}, upsert=True)
+            collection.insert_one({'_id': data['date'], 'title': data['title'], 'files': data['files']})
     except:
         print("Unexpected error:", sys.exc_info())
 
@@ -32,17 +32,18 @@ def main():
         try:
             # Title's are the most consistent method for determining performance date.
             if 'title' in item.metadata:
-                match = re.search(r'(\d{1,4}[-|/]\d{1,2}[-|/]\d{2,4})', item.metadata['title'])
+                match = re.search(r'(\d{4}[-|/]\d{2}[-|/]\d{2})', item.metadata['title'])
 
             if match:
                 # Create an array of songs
                 files = [x['title'] for x in item.files if 'title' in x]
 
                 title = item.metadata['title']
-                data = {'title': title, 'files': files}
+                year = match.group()[:4]
+                data = {'title': title, 'files': files, 'date': match.group()}
 
                 # Add to database
-                add_to_mongo(db, match.group(), data)
+                add_to_mongo(db, year, data)
         except TypeError:
             pass
 
