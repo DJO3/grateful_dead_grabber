@@ -46,7 +46,7 @@ def get_all_setlists(artist, page_number, sets_per_page):
 def main():
     # Connect to MongoDB, select grateful_dead collection.
     connection = mongo('localhost', 27017)
-    db = connection.grateful_dead
+    db = connection.setlists
 
     # Get setlists - check if cached first - if not use setlist.fm REST api and then cache it.
     if isfile('setlists.json'):
@@ -59,7 +59,7 @@ def main():
 
     # Add setlists to MongoDB for future use.
     for setlist in setlists:
-        collection_name = setlist['@eventDate']
+        collection_name = 'grateful-dead'
         add_to_mongo(db, collection_name, setlist)
 
 
