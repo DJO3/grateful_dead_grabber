@@ -13,7 +13,10 @@ class ShowDates(Resource):
     def get(self):
 
         # Get url arguments
-        kwargs = request.args
+        if request.args:
+            kwargs = request.args
+        else:
+            return jsonify({"status": "fail", "data": "No arguments passed in."})
 
         if kwargs['artist']:
             artist = kwargs['artist']
@@ -29,7 +32,10 @@ class Tours(Resource):
     def get(self):
 
         # Get url arguments
-        kwargs = request.args
+        if request.args:
+            kwargs = request.args
+        else:
+            return jsonify({"status": "fail", "data": "No arguments passed in."})
 
         if kwargs['artist']:
             artist = kwargs['artist']
@@ -41,7 +47,7 @@ class Tours(Resource):
             tours = [tour['_id'] for tour in tour_data if tour['_id'] != 'null']
             if tours:
                 return jsonify({"status": "ok", "data": tours})
-        return {"status": "fail", "data": "No tours found!"}
+        return jsonify({"status": "fail", "data": "No tours found!"})
 
 
 # Get available artists
