@@ -10,14 +10,38 @@ mongo = PyMongo(app, config_prefix='MONGO')
 
 # Get concert dates for available artist
 class ShowDates(Resource):
-    def get(self, artist=None):
+    def get(self):
 
-        if artist:
+        # Get url arguments
+        kwargs = request.args
+
+        if kwargs['artist']:
+            artist = kwargs['artist']
             setlists = mongo.db[artist].find()
             if setlists.count():
                 ShowDates = [setlist['_id'] for setlist in setlists]
                 return jsonify({"status": "ok", "data": ShowDates})
         return {"status": "fail", "data": "No setlists found for {0}".format(artist)}
+
+
+# Get list of all tours
+class Tours(Resource):
+    def get(self):
+
+        # Get url arguments
+        kwargs = request.args
+
+        if kwargs['artist']:
+            artist = kwargs['artist']
+            pipeline = [
+                {"$match": {"data.@tour": {"$exists": True, "$ne": None}}},
+                {'$group': {'_id': "$data.@tour"}}
+            ]
+            tour_data = list(mongo.db[artist].aggregate(pipeline))
+            tours = [tour['_id'] for tour in tour_data if tour['_id'] != 'null']
+            if tours:
+                return jsonify({"status": "ok", "data": tours})
+        return {"status": "fail", "data": "No tours found!"}
 
 
 # Get available artists
@@ -44,7 +68,8 @@ api = Api(app)
 
 # api.add_resource(Index, "/", endpoint="index")
 api.add_resource(Artists, "/api/v1/artists", endpoint="artists")
-api.add_resource(ShowDates, "/api/v1/artists/<string:artist>", endpoint="showdates")
+api.add_resource(ShowDates, "/api/v1/showdates", endpoint="showdates")
+api.add_resource(Tours, "/api/v1/tours/", endpoint="tours")
 
 if __name__ == "__main__":
     app.run(host='localhost', port=5000, debug=True)
