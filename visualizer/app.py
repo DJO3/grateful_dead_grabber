@@ -10,38 +10,31 @@ mongo = PyMongo(app, config_prefix='MONGO')
 
 # Get concert dates for available artist
 class Shows(Resource):
-    def get(self):
+    def get(self, artist=None):
 
         # Get url arguments
         if request.args:
             kwargs = request.args
-        else:
-            return jsonify({"status": "fail", "data": "No arguments passed in."})
 
         # If an artist is passed in, grab all shows from MongoDB.
-        if kwargs['artist']:
-            artist = kwargs['artist']
+        if artist:
             setlists = mongo.db[artist].find()
             if setlists.count():
                 shows = [setlist['_id'] for setlist in setlists]
                 return jsonify({"status": "ok", "data": shows})
-        return {"status": "fail", "data": "No shows found!"}
+        return {"status": "fail", "data": "No shows found for artist {0}".format(artist)}
 
 
 # Get list of all tours
 class Tours(Resource):
-    def get(self):
+    def get(self, artist=None):
 
         # Get url arguments
         if request.args:
             kwargs = request.args
-        else:
-            return jsonify({"status": "fail", "data": "No arguments passed in."})
 
         # If an artist is passed in, grab all tours from MongoDB.
-        if kwargs['artist']:
-            artist = kwargs['artist']
-
+        if artist:
             # Filter our null values and group by tour name
             pipeline = [
                 {"$match": {"data.@tour": {"$exists": True, "$ne": None}}},
@@ -51,7 +44,8 @@ class Tours(Resource):
             tours = [tour['_id'] for tour in tour_data]
             if tours:
                 return jsonify({"status": "ok", "data": tours})
-        return jsonify({"status": "fail", "data": "No tours found!"})
+            else:
+                return jsonify({"status": "fail", "data": "No tours found for artist {0}".format(artist)})
 
 
 # Get available artists
@@ -73,8 +67,8 @@ app.add_url_rule('/', 'index', index)
 # API routes
 api = Api(app)
 api.add_resource(Artists, "/api/v1/artists", endpoint="artists")
-api.add_resource(Shows, "/api/v1/shows", endpoint="shows")
-api.add_resource(Tours, "/api/v1/tours/", endpoint="tours")
+api.add_resource(Shows, "/api/v1/shows/<string:artist>", endpoint="shows")
+api.add_resource(Tours, "/api/v1/tours/<string:artist>", endpoint="tours")
 
 if __name__ == "__main__":
     app.run(host='localhost', port=5000, debug=True)
