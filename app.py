@@ -1,7 +1,7 @@
 from flask import Flask, render_template, jsonify, url_for, redirect, request
 from flask_pymongo import PyMongo
 from flask_restful import Api, Resource
-from data_builder import *
+from data_builder.data_builder import *
 
 # Create app and connect to MongoDB
 app = Flask(__name__)
