@@ -13,7 +13,7 @@ Visualize Concert Data
 
 
 # Summary
-[setlist.fm](http://www.setlist.fm/setlists/grateful-dead-bd6ad4a.html) contains a myriad of concert data for artist all over the world. 
+[setlist.fm](http://www.setlist.fm) contains a myriad of concert data for artist all over the world. 
 The goal of this project is to use their public api to retrieve and visualize concert data using Python and JavaScript.
 
 # Requirements
