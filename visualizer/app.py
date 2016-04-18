@@ -1,6 +1,7 @@
 from flask import Flask, render_template, jsonify, url_for, redirect, request
 from flask_pymongo import PyMongo
 from flask_restful import Api, Resource
+from data_builder import *
 
 # Create app and connect to MongoDB
 app = Flask(__name__)
@@ -18,10 +19,9 @@ class Shows(Resource):
 
         # If an artist is passed in, grab all shows from MongoDB.
         if artist:
-            setlists = mongo.db[artist].find()
-            if setlists.count():
-                shows = [setlist['_id'] for setlist in setlists]
-                return jsonify({"status": "ok", "data": shows})
+            shows = get_shows(mongo, artist)
+            if shows['total']:
+                return jsonify({"status": "ok", "data": shows['shows'], "total": shows['total']})
         return {"status": "fail", "data": "No shows found for artist {0}".format(artist)}
 
 
@@ -36,24 +36,19 @@ class Tours(Resource):
         # If an artist is passed in, grab all tours from MongoDB.
         if artist:
             # Filter our null values and group by tour name
-            pipeline = [
-                {"$match": {"data.@tour": {"$exists": True, "$ne": None}}},
-                {'$group': {'_id': "$data.@tour"}}
-            ]
-            tour_data = list(mongo.db[artist].aggregate(pipeline))
-            tours = [tour['_id'] for tour in tour_data]
-            if tours:
-                return jsonify({"status": "ok", "data": tours})
-            else:
-                return jsonify({"status": "fail", "data": "No tours found for artist {0}".format(artist)})
+            tours = get_tours(mongo, artist)
+            if tours['total']:
+                return jsonify({"status": "ok", "data": tours['tours'], "total": tours['total']})
+            return jsonify({"status": "fail", "data": "No tours found for artist {0}".format(artist)})
 
 
 # Get available artists
 class Artists(Resource):
     def get(self):
-        artists = mongo.db.collection_names()
-        artists.remove('system.indexes')
-        return jsonify({"status": "ok", "data": artists})
+        artists = get_artists(mongo)
+        if artists['total']:
+            return jsonify({"status": "ok", "data": artists['artists'], "total": artists['total']})
+        return jsonify({"status": "fail", "data": "No artists found "})
 
 
 # Homepage, placeholder for metrics.
