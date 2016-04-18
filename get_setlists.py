@@ -39,7 +39,12 @@ def get_all_setlists(artist, page_number, sets_per_page):
         url = "http://api.setlist.fm/rest/0.1/search/setlists?artistName={0}&p={1}".format(artist, page)
         response = session.get(url, headers=headers)
         data = response.json()
-        setlists = setlists + data['setlists']['setlist']
+
+        # If more than one result, concatenate lists, else append element to list.
+        if type(data['setlists']['setlist']) is list:
+            setlists = setlists + data['setlists']['setlist']
+        elif type(data['setlists']['setlist']) is dict:
+            setlists.append(data['setlists']['setlist'])
 
     return setlists
 
