@@ -13,15 +13,11 @@ mongo = PyMongo(app, config_prefix='MONGO')
 class Shows(Resource):
     def get(self, artist=None):
 
-        # Get url arguments
-        if request.args:
-            kwargs = request.args
-
         # If an artist is passed in, grab all shows from MongoDB.
         if artist:
-            shows = get_shows(mongo, artist)
+            shows = get_shows(mongo, artist, request.args)
             if shows['total']:
-                return jsonify({"status": "ok", "data": shows['shows'], "total": shows['total']})
+                return jsonify({"status": "ok", "data": shows})
         return {"status": "fail", "data": "No shows found for artist {0}".format(artist)}
 
 
@@ -29,14 +25,10 @@ class Shows(Resource):
 class Tours(Resource):
     def get(self, artist=None):
 
-        # Get url arguments
-        if request.args:
-            kwargs = request.args
-
         # If an artist is passed in, grab all tours from MongoDB.
         if artist:
             # Filter our null values and group by tour name
-            tours = get_tours(mongo, artist)
+            tours = get_tours(mongo, artist, request.args)
             if tours['total']:
                 return jsonify({"status": "ok", "data": tours['tours'], "total": tours['total']})
             return jsonify({"status": "fail", "data": "No tours found for artist {0}".format(artist)})
@@ -45,7 +37,7 @@ class Tours(Resource):
 # Get available artists
 class Artists(Resource):
     def get(self):
-        artists = get_artists(mongo)
+        artists = get_artists(mongo, request.args)
         if artists['total']:
             return jsonify({"status": "ok", "data": artists['artists'], "total": artists['total']})
         return jsonify({"status": "fail", "data": "No artists found "})
@@ -53,7 +45,7 @@ class Artists(Resource):
 
 # Homepage, placeholder for metrics.
 def index():
-    return render_template('index.html')
+    return render_template('column-basic.html')
 
 
 # App routes
