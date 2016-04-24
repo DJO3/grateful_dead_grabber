@@ -13,7 +13,7 @@ function getSeries (artists, selector, callback) {
 
     // Get shows for each artist
     for (var i = 0; i < artists.length; i++) {
-        var url = '/api/v1/shows/' + artists[i] + '?count=' + selector;
+        var url = 'http://api.localhost:5000/v1/shows/' + artists[i] + '?count=' + selector;
         $.ajax({
             url: url,
             indexValue: i,
