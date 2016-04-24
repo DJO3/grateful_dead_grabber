@@ -1,7 +1,7 @@
 init();
 
 function init() {
-    getSeries(['grateful-dead', 'allman-brothers', 'dave-matthews-band'], 'month', function(categories, series) {
+    getSeries(['grateful-dead', 'allman-brothers', 'dave-matthews-band'], 'year', function(categories, series) {
         columnBasic(categories, series);
     });
 }
@@ -9,24 +9,49 @@ function init() {
 // Asynchronously get monthly show stats. Accepts array of artists and selector string 'day', 'month', 'year'
 function getSeries (artists, selector, callback) {
     series = [];
+    categories = [];
+
+    // Get shows for each artist
     for (var i = 0; i < artists.length; i++) {
         var url = '/api/v1/shows/' + artists[i] + '?count=' + selector;
-        var ajaxData = $.ajax({
+        $.ajax({
             url: url,
             indexValue: i,
             success: function (result) {
-                var name = artists[this.indexValue];
-                var data = result.data.count.values;
-                series.push({"name": name, "data": data});
 
+                // Build Highcharts data object - requires name(string) and data(array)
+                var name = artists[this.indexValue];
+                var raw_data = result.data.count;
+                series.push({"name": name, "raw_data": raw_data, "data": []});
+
+                // Merge all artist categories for use in x-axis
+                categories = categories.concat(result.data.count.keys);
+
+                // All AJAX calls have completed - align data to x-axis
                 if (series.length === artists.length) {
+
+                    // Remove duplicates from x-axis
+                    categories = (categories.filter(function(item, i, ar){ return ar.indexOf(item) === i; })).sort();
+
+                    // If artist has category, add it to data, otherwise add a 0.
+                    series.forEach(function (artist) {
+                        categories.forEach(function (category) {
+                            if (artist.raw_data[category]) {
+                                artist['data'].push(artist.raw_data[category])
+                            } else {
+                                artist['data'].push('0')
+                            }
+                        })
+                    });
+
+                    // Month is special, label x-axis with months instead of numbers if desired
                     if (selector === 'month') {
                         categories = [
                             'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
                         ];
-                    } else {
-                        categories = result.data.count.keys;
                     }
+
+                    // Load chart
                     callback(categories, series)
                 }
             }
