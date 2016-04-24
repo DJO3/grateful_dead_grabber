@@ -45,7 +45,7 @@ class Artists(Resource):
 
 # Homepage, placeholder for metrics.
 def index():
-    return render_template('column-basic.html')
+    return render_template('index.html')
 
 
 # App routes
