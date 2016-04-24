@@ -20,22 +20,13 @@ def get_shows(mongo, artist, kwargs=None):
         return_dict['shows'] = [show['_id'] for show in shows_data]
         return_dict['total'] = len(return_dict['shows'])
 
-        # Check options for count - accepts day, month or year.
-        if kwargs and 'count' in kwargs:
-            ordinal = {'day': 0, 'month': 1, 'year': 2}
-            if kwargs['count'] in ordinal:
-                index = ordinal[kwargs['count']]
-                months_dict = Counter([month.split('-')[index] for month in return_dict['shows']])
-                months = []
-                for month in range(1, 13):
-                    padded_month = str(month).zfill(2)
-                    count = months_dict[padded_month]
-                    months.append(count)
-                return_dict['count'] = months
-            else:
-                return_dict['count'] = 'Only day, month, or year are available options for count'
+        # Check additional return options
+        if kwargs:
 
-        return return_dict
+            # Check options for count - accepts day, month or year.
+            if 'count' in kwargs:
+                return_dict['count'] = count(kwargs, return_dict['shows'])
+
     return return_dict
 
 
@@ -54,3 +45,22 @@ def get_tours(mongo, artist, kwargs=None):
         return_dict['total'] = len(return_dict['tours'])
         return return_dict
     return return_dict
+
+
+# Return a dict of day/month/year: count
+def count(kwargs, dates):
+    # Check options for count - accepts day, month or year.
+    ordinal = {'day': 0, 'month': 1, 'year': 2}
+    if kwargs['count'] in ordinal:
+        index = ordinal[kwargs['count']]
+
+        # Key:Value - For future when JS Object.values() is implemented.
+        date_dict = Counter([date.split('-')[index] for date in dates])
+
+        # Arrays of Keys and Values - For current use.
+        date_dict['keys'] = sorted(date_dict.keys())
+        date_dict['values'] = [date_dict[key] for key in date_dict['keys']]
+        return date_dict
+    else:
+        return_count = 'Only day, month, or year are available options for count'
+    return return_count

@@ -1,8 +1,8 @@
 init();
 
 function init() {
-    getSeries(['grateful-dead', 'allman-brothers', 'dave-matthews-band'], 'month', function(series) {
-        columnBasic(series);
+    getSeries(['grateful-dead', 'allman-brothers', 'dave-matthews-band'], 'month', function(categories, series) {
+        columnBasic(categories, series);
     });
 }
 
@@ -16,18 +16,25 @@ function getSeries (artists, selector, callback) {
             indexValue: i,
             success: function (result) {
                 var name = artists[this.indexValue];
-                var data = result.data.count;
+                var data = result.data.count.values;
                 series.push({"name": name, "data": data});
 
                 if (series.length === artists.length) {
-                    callback(series)
+                    if (selector === 'month') {
+                        categories = [
+                            'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+                        ];
+                    } else {
+                        categories = result.data.count.keys;
+                    }
+                    callback(categories, series)
                 }
             }
         });
     }
 }
 
-function columnBasic(series) {
+function columnBasic(categories, series) {
     $('#container').highcharts({
         chart: {
             type: 'column'
@@ -39,20 +46,7 @@ function columnBasic(series) {
             text: 'Source: Setlist.fm'
         },
         xAxis: {
-            categories: [
-                'Jan',
-                'Feb',
-                'Mar',
-                'Apr',
-                'May',
-                'Jun',
-                'Jul',
-                'Aug',
-                'Sep',
-                'Oct',
-                'Nov',
-                'Dec'
-            ],
+            categories: categories,
             crosshair: true
         },
         yAxis: {
