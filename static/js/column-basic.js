@@ -1,10 +1,11 @@
-init();
+// init();
 
-function init() {
+$('#column-basic').on("click", function() {
+    $('#modal-id').modal('show');
     getSeries(['grateful-dead', 'allman-brothers', 'dave-matthews-band'], 'year', function(categories, series) {
         columnBasic(categories, series);
     });
-}
+});
 
 // Asynchronously get monthly show stats. Accepts array of artists and selector string 'day', 'month', 'year'
 function getSeries (artists, selector, callback) {
