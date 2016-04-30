@@ -12,7 +12,6 @@ function defaultArtists() {
 
 // Load column-basic chart on click, wiggle briefly on mouseenter
 $('#column-basic').on("click", function() {
-    $(this).ClassyWiggle('stop');
     var defaultSelector = 'month';
     var artists = getCheckedArtists();
     console.log(artists);
@@ -22,14 +21,13 @@ $('#column-basic').on("click", function() {
         columnBasic(categories, series);
     });
 }).on("mouseenter", function() {
-    $(this).ClassyWiggle('start', {limit: 2});
+    $(this).animate({marginTop: '-=10px'}, 0);
 }).on("mouseleave", function() {
-    $(this).ClassyWiggle('stop');
+    $(this).animate({marginTop: '+=10px'}, 0);
 });
 
 // Load pie-drildown chart on click, wiggle briefly on mouseenter
 $('#pie-drilldown').on("click", function() {
-    $(this).ClassyWiggle('stop');
     // var defaultSelector = 'month';
     // var artists = getCheckedArtists();
     // console.log(artists);
@@ -41,14 +39,13 @@ $('#pie-drilldown').on("click", function() {
     // });
     pieDrillDown();
 }).on("mouseenter", function() {
-    $(this).ClassyWiggle('start', {limit: 2});
+    $(this).animate({marginTop: '-=10px'}, 0);
 }).on("mouseleave", function() {
-    $(this).ClassyWiggle('stop');
+    $(this).animate({marginTop: '+=10px'}, 0);
 });
 
 // Load pie-drildown chart on click, wiggle briefly on mouseenter
 $('#basic-line').on("click", function() {
-    $(this).ClassyWiggle('stop');
     // var defaultSelector = 'month';
     // var artists = getCheckedArtists();
     // console.log(artists);
@@ -60,9 +57,9 @@ $('#basic-line').on("click", function() {
     // });
     basicLine();
 }).on("mouseenter", function() {
-    $(this).ClassyWiggle('start', {limit: 2});
+    $(this).animate({marginTop: '-=10px'}, 0);
 }).on("mouseleave", function() {
-    $(this).ClassyWiggle('stop');
+    $(this).animate({marginTop: '+=10px'}, 0);
 });
 
 // Change chart x-axis based on day/month/year on click
