@@ -47,7 +47,7 @@
             	    {% block column_basic %}{% endblock %}
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    {% block pie_chart %}{% endblock %}
+                    {% block pie_drilldown %}{% endblock %}
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                     {% block basic_line %}{% endblock %}
@@ -62,14 +62,14 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">
                             <!--Button Selector-->
-                            <div class="btn-group pull-left" role="group" aria-label="...">
+                            <div id="ordinal-selector" class="btn-group pull-left" role="group" aria-label="...">
                               <button id="day-btn" type="button" class="btn btn-default">Day</button>
                               <button id="month-btn" type="button" class="btn btn-default">Month</button>
                               <button id="year-btn" type="button" class="btn btn-default">Year</button>
                             </div>
                         </h4>
                     </div>
-                    <div id="container" class="modal-body">
+                    <div id="container" class="modal-body span12">
                         Modal body ...
                     </div>
                     <div class="modal-footer">
@@ -85,6 +85,7 @@
 <script src="../static/js/jquery.classywiggle.min.js"></script>
 <script src="../static/js/bootstrap.min.js"></script>
 <script src="../static/js/highcharts.js"></script>
+<script src="../static/js/drilldown.js"></script>
 <script src="../static/js/exporting.js"></script>
 <script src="../static/js/column-basic.js"></script>
 </html>
