@@ -37,12 +37,6 @@
                   </ul>
                 </div>
 
-{#                <!--Button Selector-->#}
-{#                <div class="btn-group pull-right" role="group" aria-label="...">#}
-{#                  <button type="button" class="btn btn-default">Day</button>#}
-{#                  <button type="button" class="btn btn-default">Month</button>#}
-{#                  <button type="button" class="btn btn-default">Year</button>#}
-{#                </div>#}
             </div>
         </div>
 
@@ -70,7 +64,14 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Modal title</h4>
+                        <h4 class="modal-title">
+                            <!--Button Selector-->
+                            <div class="btn-group pull-left" role="group" aria-label="...">
+                              <button type="button" class="btn btn-default">Day</button>
+                              <button type="button" class="btn btn-default">Month</button>
+                              <button type="button" class="btn btn-default">Year</button>
+                            </div>
+                        </h4>
                     </div>
                     <div id="container" class="modal-body">
                         Modal body ...

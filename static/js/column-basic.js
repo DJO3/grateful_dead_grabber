@@ -7,6 +7,13 @@ $('#column-basic').on("click", function() {
     });
 });
 
+$('#column-basic').on("click", function() {
+    $('#modal-id').modal('show');
+    getSeries(['grateful-dead', 'allman-brothers', 'dave-matthews-band'], 'month', function(categories, series) {
+        columnBasic(categories, series);
+    });
+});
+
 // Asynchronously get monthly show stats. Accepts array of artists and selector string 'day', 'month', 'year'
 function getSeries (artists, selector, callback) {
     series = [];
