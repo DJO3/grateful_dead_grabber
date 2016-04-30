@@ -13,19 +13,19 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
                 <!--Artist Input-->
-                  <div class="col-xs-5 col-sm-4">
+                  <div class="col-xs-5 col-sm-4 pull-left">
                     <div class="input-group">
                       <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
+                        <button class="btn btn-default" type="button">Add Artist</button>
                       </span>
                       <input type="text" class="form-control" placeholder="Search for...">
                     </div>
                   </div>
 
-                <!--Selected Artists-->
-                <div class="dropdown col-xs-3 col-sm-1 pull-right">
+                <!--Artists Dropdown-->
+                <div class="dropdown pull-right">
                   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    Artists
+                    Available Artists
                     <span class="caret"></span>
                   </button>
                   <ul id="artists-list" class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -63,9 +63,9 @@
                         <h4 class="modal-title">
                             <!--Button Selector-->
                             <div class="btn-group pull-left" role="group" aria-label="...">
-                              <button type="button" class="btn btn-default">Day</button>
-                              <button type="button" class="btn btn-default">Month</button>
-                              <button type="button" class="btn btn-default">Year</button>
+                              <button id="day-btn" type="button" class="btn btn-default">Day</button>
+                              <button id="month-btn" type="button" class="btn btn-default">Month</button>
+                              <button id="year-btn" type="button" class="btn btn-default">Year</button>
                             </div>
                         </h4>
                     </div>
@@ -74,7 +74,6 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
@@ -83,6 +82,7 @@
 </body>
 
 <script src="../static/js/jquery-2.2.3.min.js"></script>
+<script src="../static/js/jquery.classywiggle.min.js"></script>
 <script src="../static/js/bootstrap.min.js"></script>
 <script src="../static/js/highcharts.js"></script>
 <script src="../static/js/exporting.js"></script>
