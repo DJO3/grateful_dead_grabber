@@ -1,0 +1,16 @@
+#nav-row {
+    padding: 1rem;
+}
+
+.dropdown-menu li a input {
+    margin-right: 1rem;
+}
+
+body {
+  padding-top: 70px;
+}
+@media (max-width: 979px) {
+  body {
+    padding-top: 0px;
+  }
+}
