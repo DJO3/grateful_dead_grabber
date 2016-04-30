@@ -1,4 +1,8 @@
-// init();
+init();
+
+function init() {
+    getArtists(populateArtistsDropdown);
+}
 
 $('#column-basic').on("click", function() {
     $('#modal-id').modal('show');
@@ -7,12 +11,30 @@ $('#column-basic').on("click", function() {
     });
 });
 
-$('#column-basic').on("click", function() {
-    $('#modal-id').modal('show');
-    getSeries(['grateful-dead', 'allman-brothers', 'dave-matthews-band'], 'month', function(categories, series) {
-        columnBasic(categories, series);
+// $('#column-basic').on("click", function() {
+//     $('#modal-id').modal('show');
+//     getSeries(['grateful-dead', 'allman-brothers', 'dave-matthews-band'], 'month', function(categories, series) {
+//         columnBasic(categories, series);
+//     });
+// });
+
+function getArtists (callback) {
+    var url = 'http://api.localhost:5000/v1/artists';
+    $.ajax({
+        url: url,
+        success: function (results) {
+            callback(results.data)
+        }
+    })
+}
+
+function populateArtistsDropdown(artists) {
+    var dropdown = $('#artists-list');
+    artists.forEach(function (artist) {
+        dropdown.append('<li><a href="#"><input type="checkbox" val="allman-brothers">'+artist+'</a></li>')
+        dropdown.append('<li role="separator" class="divider"></li>')
     });
-});
+}
 
 // Asynchronously get monthly show stats. Accepts array of artists and selector string 'day', 'month', 'year'
 function getSeries (artists, selector, callback) {

@@ -6,6 +6,11 @@
     margin-right: 1rem;
 }
 
+.chart-img {
+    max-height:250px;
+    width:100%;
+}
+
 body {
   padding-top: 70px;
 }
