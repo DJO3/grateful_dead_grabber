@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../static/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/css/site.css">
     <title>Column-Basic</title>
@@ -12,7 +13,7 @@
     	<div class="row" id="nav-row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-                <!--Artist Input-->
+                <!--Add Artists-->
                   <div class="col-xs-5 col-sm-4 pull-left">
                     <div class="input-group">
                       <span class="input-group-btn">
@@ -40,21 +41,38 @@
 
     <div class="container-fluid">
 
-        <!--Chart Placeholder-->
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            	    {% block column_basic %}{% endblock %}
+
+                <!--Chart Placeholder-->
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        {% block column_basic %}{% endblock %}
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        {% block pie_drilldown %}{% endblock %}
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        {% block basic_line %}{% endblock %}
+                    </div>
                 </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    {% block pie_drilldown %}{% endblock %}
+
+                <!--Sidebar-->
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 sidebar">
+                    <div class="sidebar-nav-fixed pull-right affix">
+                        <ul class="nav nav-sidebar">
+                            <li class="active"><a href="#">Compare Artists</a></li>
+                            <li><a href="#">Single Artist Metrics</a></li>
+                            <li><a href="#">API Documentation</a></li>
+                            <li><a href="#">Resources & Credits</a></li>
+                          </ul>
+                    </div>
                 </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    {% block basic_line %}{% endblock %}
-                </div>
+
             </div>
         </div>
 
+        <!--Chart Modal-->
         <div class="modal fade" id="modal-id" hidden>
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">

@@ -11,6 +11,15 @@
     margin-right: 1rem;
 }
 
+.sidebar-nav-fixed {
+    width: 13%;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  background-color: #eee;
+}
+
 .chart-img {
     max-height:250px;
     width:100%;
@@ -18,9 +27,4 @@
 
 body {
   padding-top: 70px;
-}
-@media (max-width: 979px) {
-  body {
-    padding-top: 0px;
-  }
 }
