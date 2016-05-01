@@ -97,14 +97,23 @@ function getArtists (callback) {
 function populateArtistsDropdown(artists) {
     var dropdown = $('#artists-list');
     artists.forEach(function (artist) {
-        dropdown.append('<li><a href="#"><input type="checkbox" id="'+artist+'">'+artist+'</a></li>')
-        dropdown.append('<li role="separator" class="divider"></li>')
+        dropdown.append('<div id="'+artist+'" class="list-group-item"><a href="#">'+artist+'</a></div>');
+    });
+
+    // Add active class to select artist div
+    var artistDiv = $('.list-group-item');
+    artistDiv.on("click", function() {
+        if ($(this).hasClass("active")) {
+            $(this).removeClass("active");
+        } else {
+            $(this).addClass("active");
+        }
     });
 }
 
-// Returns an array of all selected artists in artists dropdown
+// Returns an array of all selected artists in artists
 function getCheckedArtists() {
-    var artists = $('input:checkbox:checked').map(function() {
+    var artists = $('div .active.list-group-item').map(function() {
         return this.id;
     });
 

@@ -3,21 +3,24 @@
 }
 
 .dropdown {
-    padding-right: 15px;
-    padding-left: 15px;
+    width: 100%;
+    margin-bottom: 1rem;
 }
 
-.dropdown-menu li a input {
-    margin-right: 1rem;
+#artists-list {
+  max-height: 75%;
+  overflow: auto;
 }
 
 .sidebar-nav-fixed {
     width: 13%;
 }
-.nav-sidebar > .active > a,
-.nav-sidebar > .active > a:hover,
-.nav-sidebar > .active > a:focus {
+
+.list-group-item:hover,
+.list-group-item.active:hover,
+.list-group-item.active {
   background-color: #eee;
+  border-color: #eee;
 }
 
 .chart-img {
