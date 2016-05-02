@@ -95,18 +95,31 @@ function getArtists (callback) {
 
 // Appends artists to artists dropdown
 function populateArtistsDropdown(artists) {
-    var dropdown = $('#artists-list');
+
+    // Populate datalist with artists
+    var dropdown = $('#artists-datalist');
     artists.forEach(function (artist) {
-        dropdown.append('<div id="'+artist+'" class="list-group-item"><a href="#">'+artist+'</a></div>');
+        dropdown.append('<option value="'+artist+'" class="artist-datalist"></option>');
     });
 
-    // Add active class to select artist div
-    var artistDiv = $('.list-group-item');
-    artistDiv.on("click", function() {
-        if ($(this).hasClass("active")) {
-            $(this).removeClass("active");
-        } else {
-            $(this).addClass("active");
+    // Add selected artists to #artists-list
+    $("#artist-datalist-input").on('input', function () {
+        var val = this.value;
+        if ($('.artist-datalist').filter(function(){
+            return this.value === val;
+        }).length) {
+            if (! document.getElementById(val)) {
+                $('#artists-list').append('<div id="'+val+'" class="list-group-item active"><a href="#">'+val+'</a></div>');
+            }
+
+            // Add and remove active class
+            $('.list-group-item').unbind("click").on("click", function() {
+                if ($(this).hasClass("active")) {
+                    $(this).removeClass("active");
+                } else {
+                    $(this).addClass("active");
+                }
+            });
         }
     });
 }

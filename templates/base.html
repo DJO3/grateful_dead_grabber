@@ -57,9 +57,16 @@
                 <!--Sidebar-->
                 <div class="col-md-2 col-lg-2 sidebar">
                     <div class="sidebar-nav-fixed pull-right affix">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Filter artists...">
+                        <div id="artist-datalist" class="input-group">
+                            <input id="artist-datalist-input" list="artists-datalist" type="text" class="form-control" placeholder="Filter artists...">
                         </div>
+
+                        <div id="artists-all">
+                            <datalist id="artists-datalist">
+
+                            </datalist>
+                        </div>
+
                         <!--Artists Dropdown-->
                         <div id="artists-list">
                             <!--column-basic.js getArtists()-->
