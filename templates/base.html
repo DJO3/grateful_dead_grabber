@@ -29,8 +29,11 @@
                 </ul>
                 <!--Right Items-->
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">About</a></li>
+                    <li>
+                        <div id="artist-datalist" class="input-group">
+                            <input id="artist-datalist-input" list="artists-datalist" type="text" class="form-control" placeholder="Find artists...">
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -57,9 +60,6 @@
                 <!--Sidebar-->
                 <div class="col-md-2 col-lg-2 sidebar">
                     <div class="sidebar-nav-fixed pull-right affix">
-                        <div id="artist-datalist" class="input-group">
-                            <input id="artist-datalist-input" list="artists-datalist" type="text" class="form-control" placeholder="Filter artists...">
-                        </div>
 
                         <div id="artists-all">
                             <datalist id="artists-datalist">
@@ -69,6 +69,7 @@
 
                         <!--Artists Dropdown-->
                         <div id="artists-list">
+                            <h4 id="selected-artists" class="text-center">Selected Artists</h4>
                             <!--column-basic.js getArtists()-->
                         </div>
                     </div>
