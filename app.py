@@ -1,4 +1,5 @@
 from flask import Flask, render_template, jsonify, url_for, redirect, request
+from flask.ext.cors import CORS
 from flask_pymongo import PyMongo
 from flask_restful import Api, Resource
 from data_builder.data_builder import *
@@ -6,6 +7,7 @@ from data_builder.data_builder import *
 # Create app and connect to MongoDB
 app = Flask(__name__)
 app.config["MONGO_DBNAME"] = "setlists"
+app.config['SERVER_NAME'] = 'localhost:5000'
 mongo = PyMongo(app, config_prefix='MONGO')
 
 
@@ -45,17 +47,22 @@ class Artists(Resource):
 
 # Homepage, placeholder for metrics.
 def index():
-    return render_template('column-basic.html')
+    return render_template('index.html')
 
 
 # App routes
 app.add_url_rule('/', 'index', index)
 
 # API routes
+api_subdomain = "api"
 api = Api(app)
-api.add_resource(Artists, "/api/v1/artists", endpoint="artists")
-api.add_resource(Shows, "/api/v1/shows/<string:artist>", endpoint="shows")
-api.add_resource(Tours, "/api/v1/tours/<string:artist>", endpoint="tours")
+
+api.add_resource(Artists, "/v1/artists", subdomain=api_subdomain, endpoint="artists")
+api.add_resource(Shows, "/v1/shows/<string:artist>", subdomain=api_subdomain, endpoint="shows")
+api.add_resource(Tours, "/v1/tours/<string:artist>", subdomain=api_subdomain, endpoint="tours")
+
+# Cross Origin support
+cors = CORS(app)
 
 if __name__ == "__main__":
-    app.run(host='localhost', port=5000, debug=True)
+    app.run(debug=True)

@@ -1,0 +1,43 @@
+#nav-row {
+    padding: 1rem;
+}
+
+.dropdown {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+#artist-datalist-input {
+    margin-top: 8px;
+    margin-left: -15px;
+    margin-right: 50px;
+}
+
+#artists-list {
+  max-height: 75%;
+  overflow: auto;
+}
+
+#artists-list h4 {
+    text-decoration: underline;
+}
+
+.sidebar-nav-fixed {
+    width: 13%;
+}
+
+.list-group-item:hover,
+.list-group-item.active:hover,
+.list-group-item.active {
+  background-color: #eee;
+  border-color: #eee;
+}
+
+.chart-img {
+    max-height:250px;
+    width:100%;
+}
+
+body {
+  padding-top: 70px;
+}
