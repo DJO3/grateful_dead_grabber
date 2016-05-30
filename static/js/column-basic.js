@@ -230,17 +230,17 @@ function columnBasic(categories, series) {
     });
 }
 
-// Loads drilldown pie chart
+// Loads drilldown pie chart  - currently hardcoded as proof of concept
 function pieDrillDown() {
     $('#container').highcharts({
         chart: {
             type: 'pie'
         },
         title: {
-            text: 'Shows by Country'
+            text: 'Shows by Country and City'
         },
         subtitle: {
-            text: 'Click the slices to view states. Source: Setlist.fm'
+            text: 'Click the slices to view cities. Source: Setlist.fm'
         },
         plotOptions: {
             series: {
@@ -256,105 +256,73 @@ function pieDrillDown() {
             pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
         },
         series: [{
-            name: 'Brands',
+            name: 'Country',
             colorByPoint: true,
             data: [{
-                name: 'Microsoft Internet Explorer',
+                name: 'United States',
                 y: 56.33,
-                drilldown: 'Microsoft Internet Explorer'
+                drilldown: 'United States'
             }, {
-                name: 'Chrome',
+                name: 'Egypt',
                 y: 24.03,
-                drilldown: 'Chrome'
+                drilldown: 'Egypt'
             }, {
-                name: 'Firefox',
+                name: 'Germany',
                 y: 10.38,
-                drilldown: 'Firefox'
+                drilldown: 'Germany'
             }, {
-                name: 'Safari',
-                y: 4.77,
-                drilldown: 'Safari'
-            }, {
-                name: 'Opera',
-                y: 0.91,
-                drilldown: 'Opera'
-            }, {
-                name: 'Proprietary or Undetectable',
-                y: 0.2,
-                drilldown: null
+                name: 'Canada',
+                y: 09.26,
+                drilldown: 'Canada'
             }]
         }],
         drilldown: {
             series: [{
-                name: 'Microsoft Internet Explorer',
-                id: 'Microsoft Internet Explorer',
+                name: 'united-states',
+                id: 'United States',
                 data: [
-                    ['v11.0', 24.13],
-                    ['v8.0', 17.2],
-                    ['v9.0', 8.11],
-                    ['v10.0', 5.33],
-                    ['v6.0', 1.06],
-                    ['v7.0', 0.5]
+                    ['San Francisco', 24.13],
+                    ['Oakland', 17.2],
+                    ['Seattle', 8.11],
+                    ['Boston', 5.33],
+                    ['Denver', 1.06]
                 ]
             }, {
-                name: 'Chrome',
-                id: 'Chrome',
+                name: 'egypt',
+                id: 'Egypt',
                 data: [
-                    ['v40.0', 5],
-                    ['v41.0', 4.32],
-                    ['v42.0', 3.68],
-                    ['v39.0', 2.96],
-                    ['v36.0', 2.53],
-                    ['v43.0', 1.45],
-                    ['v31.0', 1.24],
-                    ['v35.0', 0.85],
-                    ['v38.0', 0.6],
-                    ['v32.0', 0.55],
-                    ['v37.0', 0.38],
-                    ['v33.0', 0.19],
-                    ['v34.0', 0.14],
-                    ['v30.0', 0.14]
+                    ['Cairo', 24.13],
+                    ['Alexandria', 17.2],
+                    ['Giza', 8.11],
+                    ['Suez', 5.33],
+                    ['Luxor', 1.06]
                 ]
             }, {
-                name: 'Firefox',
-                id: 'Firefox',
+                name: 'germany',
+                id: 'Germany',
                 data: [
-                    ['v35', 2.76],
-                    ['v36', 2.32],
-                    ['v37', 2.31],
-                    ['v34', 1.27],
-                    ['v38', 1.02],
-                    ['v31', 0.33],
-                    ['v33', 0.22],
-                    ['v32', 0.15]
+                    ['Berlin', 24.13],
+                    ['Hamburg', 17.2],
+                    ['Munich', 8.11],
+                    ['Cologne', 5.33],
+                    ['Frankfurt', 1.06]
                 ]
             }, {
-                name: 'Safari',
-                id: 'Safari',
+                name: 'canada',
+                id: 'Canada',
                 data: [
-                    ['v8.0', 2.56],
-                    ['v7.1', 0.77],
-                    ['v5.1', 0.42],
-                    ['v5.0', 0.3],
-                    ['v6.1', 0.29],
-                    ['v7.0', 0.26],
-                    ['v6.2', 0.17]
-                ]
-            }, {
-                name: 'Opera',
-                id: 'Opera',
-                data: [
-                    ['v12.x', 0.34],
-                    ['v28', 0.24],
-                    ['v27', 0.17],
-                    ['v29', 0.16]
+                    ['Toronto', 24.13],
+                    ['Halifax', 17.2],
+                    ['Ottawa', 8.11],
+                    ['Edmonton', 5.33],
+                    ['Vancouver', 1.06]
                 ]
             }]
         }
     });
 }
 
-// Loads basicLine chart
+// Loads basicLine chart - currently hardcoded as proof of concept
 function basicLine() {
     $('#container').highcharts({
         title: {
@@ -371,16 +339,13 @@ function basicLine() {
         },
         yAxis: {
             title: {
-                text: 'Temperature (°C)'
+                text: 'Shows'
             },
             plotLines: [{
                 value: 0,
                 width: 1,
                 color: '#808080'
             }]
-        },
-        tooltip: {
-            valueSuffix: '°C'
         },
         legend: {
             layout: 'vertical',
@@ -389,16 +354,16 @@ function basicLine() {
             borderWidth: 0
         },
         series: [{
-            name: 'Tokyo',
+            name: 'grateful-dead',
             data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
         }, {
-            name: 'New York',
+            name: 'allman-brothers',
             data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
         }, {
-            name: 'Berlin',
+            name: 'dave-matthews-band',
             data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
         }, {
-            name: 'London',
+            name: 'phish',
             data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
         }]
     });
