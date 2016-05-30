@@ -32,7 +32,7 @@ Initial implementation - will change in the future.
 
 Open a web browser and navigate to http://localhost:5000/.
 Something like this should render:
-![alt text](screenshots/index.png "setlist_visualizer index")
+![alt text](screenshots/home.png "setlist_visualizer homepage")
 
 
 # Assumptions
