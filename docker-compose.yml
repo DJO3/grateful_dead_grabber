@@ -1,0 +1,33 @@
+web:
+  restart: always
+  build: ./web
+  hostname: test
+  domainname: setlist.visualizer
+  expose:
+    - "8000"
+  links:
+    - mongo:mongo
+  volumes:
+    - ~/Github/setlist_visualizer:/usr/src/app/static
+  env_file: .env
+  command: /usr/local/bin/gunicorn -w 2 -b :8000 app:app
+
+nginx:
+  restart: always
+  build: ./nginx/
+  ports:
+    - "80:80"
+  volumes:
+    - /www/static
+  volumes_from:
+    - web
+  links:
+    - web:web
+
+mongo:
+  restart: always
+  image: mongo:latest
+  volumes:
+    - /var/data/mongo
+  ports:
+    - "5432:5432"

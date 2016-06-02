@@ -7,7 +7,7 @@ from data_builder.data_builder import *
 # Create app and connect to MongoDB
 app = Flask(__name__)
 app.config["MONGO_DBNAME"] = "setlists"
-app.config['SERVER_NAME'] = 'localhost:5000'
+app.config['SERVER_NAME'] = 'test.setlist.visualizer:5000'
 mongo = PyMongo(app, config_prefix='MONGO')
 
 
