@@ -4,13 +4,13 @@ web:
   hostname: test
   domainname: setlist.visualizer
   expose:
-    - "8000"
+    - "5000"
   links:
     - mongo:mongo
   volumes:
     - ~/Github/setlist_visualizer:/usr/src/app/static
   env_file: .env
-  command: /usr/local/bin/gunicorn -w 2 -b :8000 app:app
+  command: /usr/local/bin/gunicorn -w 2 -b :5000 app:app
 
 nginx:
   restart: always
