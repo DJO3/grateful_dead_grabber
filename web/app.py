@@ -7,7 +7,7 @@ from data_builder.data_builder import *
 # Create app and connect to MongoDB
 application = Flask(__name__)
 application.config["MONGO_DBNAME"] = "setlists"
-# application.config['SERVER_NAME'] = 'setlist.visualizer:5000'
+application.config['SERVER_NAME'] = 'setlist.visualizer'
 mongo = PyMongo(application, config_prefix='MONGO')
 
 
@@ -65,4 +65,4 @@ api.add_resource(Tours, "/v1/tours/<string:artist>", subdomain=api_subdomain, en
 cors = CORS(application)
 
 if __name__ == "__main__":
-    application.run(host='0.0.0.0', port=5000, debug=True)
+    application.run(debug=True)

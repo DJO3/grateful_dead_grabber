@@ -1,7 +1,7 @@
 server {
 
     listen 80;
-    server_name web;
+    server_name api.setlist.visualizer setlist.visualizer;
     charset utf-8;
 
     location / {

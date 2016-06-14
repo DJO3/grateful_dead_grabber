@@ -28,6 +28,6 @@ mongo:
   restart: always
   image: mongo:latest
   volumes:
-    - /var/data/mongo
+    - /data:/var/data/mongo
   ports:
     - "5432:5432"
