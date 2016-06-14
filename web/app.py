@@ -8,6 +8,7 @@ from data_builder.data_builder import *
 application = Flask(__name__)
 application.config["MONGO_DBNAME"] = "setlists"
 application.config['SERVER_NAME'] = 'setlist.visualizer'
+application.config["MONGO_CONNECT"] = False
 mongo = PyMongo(application, config_prefix='MONGO')
 
 
