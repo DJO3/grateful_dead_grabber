@@ -1,16 +1,16 @@
 web:
   restart: always
   build: ./web
-  hostname: test
-  domainname: setlist.visualizer
+  ports:
+    - "5000:5000"
   expose:
     - "5000"
   links:
     - mongo:mongo
   volumes:
-    - ~/Github/setlist_visualizer:/usr/src/app/static
+    - ~/Github/setlist_visualizer:/usr/src/app
   env_file: .env
-  command: /usr/local/bin/gunicorn -w 2 -b :5000 app:app
+  command: uwsgi --ini /usr/src/app/web/setlist_visualizer.ini --pythonpath /usr/src/app/web/
 
 nginx:
   restart: always
