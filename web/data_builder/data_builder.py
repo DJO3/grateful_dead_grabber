@@ -5,7 +5,7 @@ from collections import Counter
 def get_artists(mongo, kwargs=None):
     return_dict = {'total': 0, 'artists': []}
     return_dict['artists'] = mongo.db.collection_names()
-    return_dict['artists'].remove('system.indexes')
+    # return_dict['artists'].remove('system.indexes')
     return_dict['total'] = len(return_dict['artists'])
     return return_dict
 

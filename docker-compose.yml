@@ -26,8 +26,9 @@ nginx:
 
 mongo:
   restart: always
+  hostname: mongo_host
   image: mongo:latest
   volumes:
-    - /data:/var/data/mongo
+    - /data:/var/data/
   ports:
-    - "5432:5432"
+    - "27017:27017"
