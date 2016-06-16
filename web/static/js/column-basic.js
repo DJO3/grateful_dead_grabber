@@ -84,7 +84,7 @@ function slugify(text) {
 
 // Returns all available artists
 function getArtists (callback) {
-    var url = 'http://api.localhost:5000/v1/artists';
+    var url = 'http://api.setlist.visualizer/v1/artists';
     $.ajax({
         url: url,
         success: function (results) {
@@ -144,7 +144,7 @@ function getSeries (artists, selector, callback) {
 
     // Get shows for each artist
     for (var i = 0; i < artists.length; i++) {
-        var url = 'http://api.localhost:5000/v1/shows/' + artists[i] + '?count=' + selector;
+        var url = 'http://api.setlist.visualizer/v1/shows/' + artists[i] + '?count=' + selector;
         $.ajax({
             url: url,
             indexValue: i,
