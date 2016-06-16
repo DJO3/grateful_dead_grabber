@@ -51,7 +51,7 @@ def get_all_setlists(artist, page_number, sets_per_page):
 
 def main(artist):
     # Connect to MongoDB, select grateful_dead collection.
-    connection = mongo('localhost', 27017)
+    connection = mongo('docker.local', 27017)
     db = connection.setlists
 
     # Get setlists - check if cached first - if not use setlist.fm REST api and then cache it.

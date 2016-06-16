@@ -5,10 +5,12 @@ from flask_restful import Api, Resource
 from data_builder.data_builder import *
 
 # Create app and connect to MongoDB
-app = Flask(__name__)
-app.config["MONGO_DBNAME"] = "setlists"
-app.config['SERVER_NAME'] = 'localhost:5000'
-mongo = PyMongo(app, config_prefix='MONGO')
+application = Flask(__name__)
+application.config["MONGO_HOST"] = "mongo_host"
+application.config["MONGO_DBNAME"] = "setlists"
+application.config['SERVER_NAME'] = 'setlist.visualizer'
+application.config["MONGO_CONNECT"] = False
+mongo = PyMongo(application, config_prefix='MONGO')
 
 
 # Get concert dates for available artist
@@ -51,18 +53,18 @@ def index():
 
 
 # App routes
-app.add_url_rule('/', 'index', index)
+application.add_url_rule('/', 'index', index)
 
 # API routes
 api_subdomain = "api"
-api = Api(app)
+api = Api(application)
 
 api.add_resource(Artists, "/v1/artists", subdomain=api_subdomain, endpoint="artists")
 api.add_resource(Shows, "/v1/shows/<string:artist>", subdomain=api_subdomain, endpoint="shows")
 api.add_resource(Tours, "/v1/tours/<string:artist>", subdomain=api_subdomain, endpoint="tours")
 
 # Cross Origin support
-cors = CORS(app)
+cors = CORS(application)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    application.run(debug=True)
