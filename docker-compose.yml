@@ -8,7 +8,7 @@ web:
   links:
     - mongo:mongo
   volumes:
-    - ~/Github/setlist_visualizer:/usr/src/app
+    - .:/usr/src/app
   env_file: .env
   command: uwsgi --ini /usr/src/app/web/setlist_visualizer.ini --pythonpath /usr/src/app/web/
 
@@ -29,6 +29,6 @@ mongo:
   hostname: mongo_host
   image: mongo:latest
   volumes:
-    - /data:/var/data/
+    - /Users/data/db:/data/db
   ports:
     - "27017:27017"
