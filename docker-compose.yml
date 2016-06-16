@@ -8,9 +8,9 @@ web:
   links:
     - mongo:mongo
   volumes:
-    - .:/usr/src/app
+    - web:/usr/src/app
   env_file: .env
-  command: uwsgi --ini /usr/src/app/web/setlist_visualizer.ini --pythonpath /usr/src/app/web/
+  command: uwsgi --ini /usr/src/app/setlist_visualizer.ini --pythonpath /usr/src/app/
 
 nginx:
   restart: always
