@@ -1,8 +1,6 @@
 web:
   restart: always
   build: ./web
-  ports:
-    - "5000:5000"
   expose:
     - "5000"
   links:
@@ -26,7 +24,7 @@ nginx:
 
 mongo:
   restart: always
-  hostname: mongo_host
+  hostname: mongo
   image: mongo:latest
   volumes:
     - /Users/data/db:/data/db
