@@ -6,7 +6,7 @@ from data_builder.data_builder import *
 
 # Create app and connect to MongoDB
 application = Flask(__name__)
-application.config["MONGO_HOST"] = "mongo_host"
+application.config["MONGO_HOST"] = "mongoContainer"
 application.config["MONGO_DBNAME"] = "setlists"
 application.config['SERVER_NAME'] = 'setlist.visualizer'
 application.config["MONGO_CONNECT"] = False

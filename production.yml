@@ -6,7 +6,7 @@ web:
   links:
     - mongo:mongo
   volumes:
-    - web:/usr/src/app
+    - /usr/src/app
   env_file: .env
   command: uwsgi --ini /usr/src/app/setlist_visualizer.ini --pythonpath /usr/src/app/
 
@@ -27,6 +27,6 @@ mongo:
   hostname: mongoContainer
   image: mongo:latest
   volumes:
-    - /Users/data/db:/data/db
+    - /data/db:/data/db
   ports:
     - "27017:27017"
