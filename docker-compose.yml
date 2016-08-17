@@ -6,7 +6,7 @@ web:
   links:
     - mongo:mongo
   volumes:
-    - web:/usr/src/app
+    - ./web:/usr/src/app
   env_file: .env
   command: uwsgi --ini /usr/src/app/setlist_visualizer.ini --pythonpath /usr/src/app/
 
