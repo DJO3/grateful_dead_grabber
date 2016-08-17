@@ -20,7 +20,7 @@ The goal of this project is to use their public api to retrieve and visualize co
 1. Python >= 3.5
 2. Docker version 1.11.2
 3. Docker Compose version 1.7.1
-4. Python dependencies, `pip install -r ~/setlist_visualizer/web/requirements.txt`. Necessary to populate sample artist data.
+4. Python dependencies, `pip install -r ~/setlist_visualizer/web/requirements.txt`. Necessary to populate sample artist data. Should really be used in conjunction with [virtualenvwrapper] (http://killtheyak.com/use-virtualenvwrapper/)
 5. Edit your hosts file (`/etc/hosts` on OS X/CentOS) to include the below entry. Necessary for hosts to connect to Docker containers:
   - `127.0.0.1       docker.local setlist.visualizer api.setlist.visualizer`
 
